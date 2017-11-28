@@ -8,6 +8,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private Button CreateEditButton;
     private Button InfoButton;
 
     @Override
@@ -15,8 +17,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        InfoButton = findViewById(R.id.info_button);
-
+        CreateEditButton = findViewById(R.id.add_button);
+        CreateEditButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, CreateEditActivity.class);
+                startActivity(intent);
+                }
+        });
+              
+        InfoButton = findViewById(R.id.info_button);    
         InfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -25,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
 
