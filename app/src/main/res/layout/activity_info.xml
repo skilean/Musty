@@ -6,4 +6,25 @@
     android:layout_height="match_parent"
     tools:context="com.android.musty.InfoActivity">
 
+    <TextView
+        android:id="@+id/info_about"
+        android:layout_width="353dp"
+        android:layout_height="140dp"
+
+        android:layout_marginBottom="355dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Musty - удобное приложение, позволяющее пользователю организовать свой досуг, создавая заметки с разделением по категориям."
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />;
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

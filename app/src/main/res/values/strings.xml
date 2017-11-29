@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Musty</string>
+
+    <string-array name="category">
+        <item>Фильмы</item>
+        <item>Сериалы</item>
+        <item>Книги</item>
+        <item>Игры</item>
+    </string-array>
+
+
 </resources>
