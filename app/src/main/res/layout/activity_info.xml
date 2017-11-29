@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.android.musty.InfoActivity">
-
+/*ПРОВЕРКА*/
     <TextView
         android:id="@+id/info_about"
         android:layout_width="353dp"
