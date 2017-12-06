@@ -1,1 +1,1 @@
-include ':app', ':createeditactivity'
+include ':app'
