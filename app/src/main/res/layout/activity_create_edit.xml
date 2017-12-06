@@ -76,6 +76,7 @@
 
     <Button
         android:id="@+id/tags"
+        android:onClick="onTagsClick"
         android:layout_width="114dp"
         android:layout_height="69dp"
         android:layout_marginEnd="254dp"
@@ -96,5 +97,84 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show_cal" />
+
+    <TableLayout
+        android:id="@+id/tags_table"
+        android:layout_width="236dp"
+        android:layout_height="203dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="26dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/show_cal"
+        app:layout_constraintTop_toBottomOf="@+id/note_nameIn"
+        tools:ignore="MissingConstraints">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/checkBox5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Хит"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/checkBox7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Новинка"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/checkBox6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Бесплатное"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Интересно"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/checkBox3"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Фантастика"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/checkBox4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ужасы"/>
+
+        </TableRow>
+    </TableLayout>
 
 </android.support.constraint.ConstraintLayout>
