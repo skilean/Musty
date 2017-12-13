@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Note> notes = new ArrayList<Note>();
     BoxAdapter boxAdapter;
 
+    TableInteraction TI = new TableInteraction(MainActivity.this.getApplicationContext());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,18 +43,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // создаем адаптер
-        fillData();
+       fillData();
         boxAdapter = new BoxAdapter(this, notes);
 
         // настраиваем список
         ListView lvMain = (ListView) findViewById(R.id.lvMain);
-        lvMain.setAdapter(boxAdapter);
+       lvMain.setAdapter(boxAdapter);
     }
 
     //поидее тут надо заполнять заметки данными из БД
     void fillData() {
-        for (int i = 1; i <= 20; i++) {
-            notes.add(new Note("Note " + i, "tags", "Date","Category"));
+
+        Object[][] not = TI.readtable(DBHelper.Columns.TABLE_NAME, "Фильмы");
+
+      for (int i = 1; i <= not.length; i++) {
+
+            notes.add(new Note(not[i][1].toString(), not[i][2].toString(), not[i][3].toString(), not[i][4].toString()));
         }
     }
 }
