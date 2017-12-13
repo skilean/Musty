@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -68,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         TableInteraction TI = new TableInteraction(MainActivity.this.getApplicationContext());
         Object[][] not = TI.readtable(DBHelper.Columns.TABLE_NAME, "Фильмы");
         if(not != null) {
-            for (int i = 1; i <= not.length; i++) {
-
+            for (int i = 0; i < not.length; i++) {
+                Log.d("table read", not[i][1].toString() + not[i][2].toString() + not[i][3].toString() + not[i][4].toString());
                 notes.add(new Note(not[i][1].toString(), not[i][2].toString(), not[i][3].toString(), not[i][4].toString()));
             }
         }
