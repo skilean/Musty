@@ -1,6 +1,5 @@
 package com.android.musty;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Note> notes = new ArrayList<Note>();
     BoxAdapter boxAdapter;
+
 
 
     @Override
@@ -42,26 +42,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        TableInteraction TI = new TableInteraction(MainActivity.this.getApplicationContext());
         // создаем адаптер
-        fillData(TI);
+       fillData();
         boxAdapter = new BoxAdapter(this, notes);
 
         // настраиваем список
         ListView lvMain = (ListView) findViewById(R.id.lvMain);
-        lvMain.setAdapter(boxAdapter);
+       lvMain.setAdapter(boxAdapter);
     }
 
     //поидее тут надо заполнять заметки данными из БД
 
-    void fillData(TableInteraction TI) {
-
+    void fillData() {
+        TableInteraction TI = new TableInteraction(MainActivity.this.getApplicationContext());
         Object[][] not = TI.readtable(DBHelper.Columns.TABLE_NAME, "Фильмы");
-/*
-      for (int i = 1; i <= not.length; i++) {
+        if(not != null) {
+            for (int i = 1; i <= not.length; i++) {
 
-            notes.add(new Note(not[i][1].toString(), not[i][2].toString(), not[i][3].toString(), not[i][4].toString()));
-        }*/
+                notes.add(new Note(not[i][1].toString(), not[i][2].toString(), not[i][3].toString(), not[i][4].toString()));
+            }
+        }
     }
 }

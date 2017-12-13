@@ -33,7 +33,7 @@ public class TableInteraction {
         Cursor cursor = db.rawQuery("select * from " + table_name +
                 " where " + DBHelper.Columns.NOTE_CATEGORY + " = \"" + note_category + "\";", null);
         // Массив для хранения таблицы.
-        Object[][] note_table = new Object[][] {null};
+        Object[][] note_table = null;
         int cPosition; // Позиция курсора
 
         // Если курсор не пуст, то переписываем данные в массив.
