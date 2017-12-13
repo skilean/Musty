@@ -2,7 +2,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -33,7 +32,7 @@
             app:layout_constraintTop_toBottomOf="@+id/item_name"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/edit_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="4dp"
@@ -43,23 +42,23 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/delete_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="4dp"
             android:layout_marginTop="1dp"
             android:background="@android:drawable/ic_menu_close_clear_cancel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"/>
+            app:layout_constraintTop_toBottomOf="@+id/edit_button"/>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/info_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="7dp"
             android:background="@android:drawable/ic_menu_help"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button2"/>
+            app:layout_constraintEnd_toStartOf="@+id/delete_button"/>
     </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

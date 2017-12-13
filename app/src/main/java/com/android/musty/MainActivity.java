@@ -5,10 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private Button CreateEditButton;
     private Button InfoButton;
+
+    ArrayList<Note> notes = new ArrayList<Note>();
+    BoxAdapter boxAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,5 +39,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // создаем адаптер
+        fillData();
+        boxAdapter = new BoxAdapter(this, notes);
+
+        // настраиваем список
+        ListView lvMain = (ListView) findViewById(R.id.lvMain);
+        lvMain.setAdapter(boxAdapter);
+    }
+
+    //поидее тут надо заполнять заметки данными из БД
+    void fillData() {
+        for (int i = 1; i <= 20; i++) {
+            notes.add(new Note("Note " + i, "tags", "Date","Category"));
+        }
     }
 }
