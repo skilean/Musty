@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Note> notes = new ArrayList<Note>();
     BoxAdapter boxAdapter;
 
-    //TableInteraction TI = new TableInteraction(MainActivity.this.getApplicationContext());
+    TableInteraction TI = new TableInteraction(MainActivity.this.getApplicationContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
