@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Button CreateEditButton;
     private Button InfoButton;
     private Button FilmsButton;
+    private Button ExitButton;
 
     ArrayList<Note> notes = new ArrayList<Note>();
     BoxAdapter boxAdapter;
@@ -44,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent( MainActivity.this, InfoActivity.class);
                 //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Если не хотим сохранять историю
                 startActivity(intent);
+            }
+        });
+
+        ExitButton = findViewById(R.id.exit_button);
+        ExitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               finish();
             }
         });
 
