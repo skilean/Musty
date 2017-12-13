@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         });
               
-        InfoButton = findViewById(R.id.info_button);    
+        InfoButton = findViewById(R.id.info_button);
         InfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
