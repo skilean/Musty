@@ -1,6 +1,7 @@
 package com.android.musty;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,16 +13,20 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private Button CreateEditButton;
     private Button InfoButton;
+    private Button FilmsButton;
 
     ArrayList<Note> notes = new ArrayList<Note>();
     BoxAdapter boxAdapter;
-
-
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbHelper = new DBHelper(this);
+        final SQLiteDatabase database = dbHelper.getWritableDatabase();
+        dbHelper.onCreate(database);
 
         CreateEditButton = findViewById(R.id.add_button);
         CreateEditButton.setOnClickListener(new View.OnClickListener(){
@@ -42,13 +47,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // создаем адаптер
-       fillData();
-        boxAdapter = new BoxAdapter(this, notes);
+        FilmsButton = findViewById(R.id.film_button);
+        FilmsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                // создаем адаптер
+                fillData();
+                boxAdapter = new BoxAdapter(MainActivity.this, notes);
 
-        // настраиваем список
-        ListView lvMain = (ListView) findViewById(R.id.lvMain);
-       lvMain.setAdapter(boxAdapter);
+                // настраиваем список
+                ListView lvMain = (ListView) findViewById(R.id.lvMain);
+                lvMain.setAdapter(boxAdapter);
+            }
+        });
     }
 
     //поидее тут надо заполнять заметки данными из БД
