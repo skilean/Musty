@@ -27,8 +27,8 @@ public class DBHelper extends SQLiteOpenHelper {
             + Columns.NOTE_HEADER + " text, "
             + Columns.NOTE_TAGS + " text, "
             + Columns.NOTE_DATE + " text, "
-            + Columns.NOTE_CATEGORY + " text "
-            + Columns.NOTE_MEDIA + " text " + ");";
+            + Columns.NOTE_CATEGORY + " text, "
+            + Columns.NOTE_MEDIA + " text" + ");";
 
     /**
      * Конструктор.
