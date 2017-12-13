@@ -22,13 +22,13 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // SQL-запрос для создания базы данных
-    private final String create_table = "create table if not exists" + Columns.TABLE_NAME + "("
-            + Columns.NOTE_ID + "integer primary key autoincrement,"
-            + Columns.NOTE_HEADER + "text,"
-            + Columns.NOTE_TAGS + "text,"
-            + Columns.NOTE_DATE + "text,"
-            + Columns.NOTE_CATEGORY + "text"
-            + Columns.NOTE_MEDIA + "text" + ");";
+    private final String create_table = "create table if not exists " + Columns.TABLE_NAME + "("
+            + Columns.NOTE_ID + " integer primary key autoincrement, "
+            + Columns.NOTE_HEADER + " text, "
+            + Columns.NOTE_TAGS + " text, "
+            + Columns.NOTE_DATE + " text, "
+            + Columns.NOTE_CATEGORY + " text "
+            + Columns.NOTE_MEDIA + " text " + ");";
 
     /**
      * Конструктор.
