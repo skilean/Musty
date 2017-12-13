@@ -31,7 +31,7 @@ public class TableInteraction {
     public Object[][] readtable(String table_name, String note_category){
         // Курсор для получения данных из таблицы.
         Cursor cursor = db.rawQuery("select * from " + table_name +
-                "where note_categoty = " + note_category + ";", null);
+                " where " + DBHelper.Columns.NOTE_CATEGORY + " = \"" + note_category + "\";", null);
         // Массив для хранения таблицы.
         Object[][] note_table = new Object[][] {null};
         int cPosition; // Позиция курсора
