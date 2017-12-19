@@ -15,11 +15,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private Button CreateEditButton;
     private Button InfoButton;
-    private Button FilmsButton;
+    private Button FilmsButton, SeriesButton, BooksButton, GamesButton;
 
     ArrayList<Note> notes = new ArrayList<Note>();
     BoxAdapter boxAdapter;
     DBHelper dbHelper;
+
+    ListView lvMain; //= (ListView) findViewById(R.id.lvMain);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,26 +55,66 @@ public class MainActivity extends AppCompatActivity {
         FilmsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
+                fillData("Фильмы");
+                boxAdapter = new BoxAdapter(MainActivity.this, notes);
+
+                lvMain = findViewById(R.id.lvMain);
+                lvMain.setAdapter(boxAdapter);
+            }
+        });
+
+        SeriesButton = findViewById(R.id.series_button);
+        SeriesButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
                 // создаем адаптер
-                fillData();
+                fillData("Сериалы");
                 boxAdapter = new BoxAdapter(MainActivity.this, notes);
 
                 // настраиваем список
-                ListView lvMain = (ListView) findViewById(R.id.lvMain);
+                lvMain = findViewById(R.id.lvMain);
                 lvMain.setAdapter(boxAdapter);
+            }
+        });
+
+        BooksButton = findViewById(R.id.books_button);
+        BooksButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                // создаем адаптер
+                fillData("Книги");
+                boxAdapter = new BoxAdapter(MainActivity.this, notes);
+
+                // настраиваем список
+                lvMain = findViewById(R.id.lvMain);
+                lvMain.setAdapter(boxAdapter);
+            }
+        });
+
+        GamesButton = findViewById(R.id.games_button);
+        GamesButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                // создаем адаптер
+                fillData("Игры");
+                boxAdapter = new BoxAdapter(MainActivity.this, notes);
+
+                // настраиваем список
+                lvMain = findViewById(R.id.lvMain);
+                lvMain.setAdapter(boxAdapter);
+
             }
         });
     }
 
     //поидее тут надо заполнять заметки данными из БД
-
-    void fillData() {
+    void fillData(String category) {
         TableInteraction TI = new TableInteraction(MainActivity.this.getApplicationContext());
-        Object[][] not = TI.readtable(DBHelper.Columns.TABLE_NAME, "Фильмы");
+        Object[][] not = TI.readtable(DBHelper.Columns.TABLE_NAME, category);
         if(not != null) {
             for (int i = 0; i < not.length; i++) {
                 Log.d("table read", not[i][1].toString() + not[i][2].toString() + not[i][3].toString() + not[i][4].toString());
-                notes.add(new Note(not[i][1].toString(), not[i][2].toString(), not[i][3].toString(), not[i][4].toString()));
+                notes.add(new Note(not[i][1].toString(), not[i][2].toString(), not[i][3].toString(), not[i][4].toString(), not[i][0].toString()));
             }
         }
     }
