@@ -9,13 +9,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.sun.javafx.scene.layout.region.Margins;
 
 public class BoxAdapter extends BaseAdapter {
     Context ctx;
     LayoutInflater lInflater;
     ArrayList<Note> objects;
-    private Button EditButton, DeleteButton, InfoButton;
+    private Button EditButton, DeleteButton;
 
+    String noteid, categ;
 
     BoxAdapter(Context context, ArrayList<Note> notes) {
         ctx = context;
@@ -52,10 +56,13 @@ public class BoxAdapter extends BaseAdapter {
         }
 
         Note p = getNotes(position);
+        noteid = p.id;
+        categ = p.category;
 
         // заполняем View в пункте списка данными
         ((TextView) view.findViewById(R.id.item_name)).setText(p.name);
         ((TextView) view.findViewById(R.id.item_tags)).setText(p.tags);
+        ((TextView) view.findViewById(R.id.item_id)).setText(p.id);
 
         //обработчик клавиши
         EditButton = view.findViewById(R.id.edit_button);
@@ -63,6 +70,8 @@ public class BoxAdapter extends BaseAdapter {
             @Override
             public  void onClick(View v){
                 Intent intent = new Intent(ctx, CreateEditActivity.class);
+                intent.putExtra("id", noteid);
+                intent.putExtra("category", categ);
                 ctx.startActivity(intent);
             }
         });
@@ -71,17 +80,11 @@ public class BoxAdapter extends BaseAdapter {
         DeleteButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
-                Intent intent = new Intent(ctx, CreateEditActivity.class);
-                ctx.startActivity(intent);
-            }
-        });
+                TableInteraction TI = new TableInteraction(ctx);
+                TI.deleteNote(DBHelper.Columns.TABLE_NAME, Integer.parseInt(noteid));
+                Toast toast = Toast.makeText(ctx, "Заметка удалена", Toast.LENGTH_SHORT);
+                toast.show();
 
-        InfoButton = view.findViewById(R.id.info_button);
-        InfoButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public  void onClick(View v){
-                Intent intent = new Intent(ctx, CreateEditActivity.class);
-                ctx.startActivity(intent);
             }
         });
 

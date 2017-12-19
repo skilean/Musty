@@ -17,6 +17,10 @@ public class CreateEditActivity extends AppCompatActivity {
 
     private Button AddNote;
     private TableLayout TagsTable;
+    String noteid = null;
+    String categ = null;
+    int flag = 0;
+    EditText editText;
 
     public void onTagsClick(View view)
     {
@@ -30,6 +34,30 @@ public class CreateEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit);
+
+        editText = findViewById(R.id.note_nameIn);
+
+        noteid = getIntent().getStringExtra("id");
+        categ = getIntent().getStringExtra("category");
+        if (noteid != null)
+        {
+            TableInteraction TI = new TableInteraction(CreateEditActivity.this.getApplicationContext());
+            Object[][] not = TI.readtable(DBHelper.Columns.TABLE_NAME, categ);
+            if(not != null) {
+                flag = 1;
+                for (int i = 0; i < not.length; i++) {
+                    if (not[i][0].toString() == noteid) {
+
+                        editText.setHint("");
+                        editText.setText(not[i][1].toString());
+
+                        //Надо поменять спинер
+                    }
+                }
+            }
+
+
+        }
 
         TagsTable = findViewById(R.id.tags_table);
 
@@ -48,7 +76,15 @@ public class CreateEditActivity extends AppCompatActivity {
                 String tagsstr;
 
                 TableInteraction TI = new TableInteraction(CreateEditActivity.this.getApplicationContext());
-                TI.addNote(DBHelper.Columns.TABLE_NAME, headerstr, " ", " ", categorystr, " ");
+
+                if (flag == 0)
+                    TI.addNote(DBHelper.Columns.TABLE_NAME, headerstr, " ", " ", categorystr, " ");
+                else
+                    TI.editNote(DBHelper.Columns.TABLE_NAME, Integer.parseInt(noteid), headerstr, " ", " ", categorystr, " ");
+
+                Intent intent = new Intent( CreateEditActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Если не хотим сохранять историю
+                startActivity(intent);
             }
         });
 

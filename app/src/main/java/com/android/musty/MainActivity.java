@@ -81,12 +81,15 @@ public class MainActivity extends AppCompatActivity {
         BooksButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
+
+                lvMain = findViewById(R.id.lvMain);
+                lvMain.setAdapter(null);
+
                 // создаем адаптер
                 fillData("Книги");
                 boxAdapter = new BoxAdapter(MainActivity.this, notes);
 
                 // настраиваем список
-                lvMain = findViewById(R.id.lvMain);
                 lvMain.setAdapter(boxAdapter);
             }
         });
