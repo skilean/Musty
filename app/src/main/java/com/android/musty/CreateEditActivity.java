@@ -12,6 +12,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.util.Log;
 
+
 public class CreateEditActivity extends AppCompatActivity {
 
     private Button AddNote;
