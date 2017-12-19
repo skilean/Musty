@@ -10,6 +10,8 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.util.Log;
+
 
 public class CreateEditActivity extends AppCompatActivity {
 
@@ -38,14 +40,15 @@ public class CreateEditActivity extends AppCompatActivity {
                 EditText header = findViewById(R.id.note_nameIn);
                 String headerstr = header.getText().toString();
 
-                TextView category = findViewById(R.id.cat_name);
-                String categorystr = category.getText().toString();
+                Spinner category = findViewById(R.id.catIn);
+                String categorystr = category.getSelectedItem().toString();
+
 
                 TableLayout tags  = findViewById(R.id.tags_table);
                 String tagsstr;
 
                 TableInteraction TI = new TableInteraction(CreateEditActivity.this.getApplicationContext());
-                TI.addNote(DBHelper.Columns.TABLE_NAME, headerstr, "", "", categorystr, "");
+                TI.addNote(DBHelper.Columns.TABLE_NAME, headerstr, " ", " ", categorystr, " ");
             }
         });
 

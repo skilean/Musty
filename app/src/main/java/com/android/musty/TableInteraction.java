@@ -85,7 +85,7 @@ public class TableInteraction {
 
         db.insert(table_name, null, values);
 
-        Log.d("db insert","Добавлена заметка.");
+        Log.d("db insert","Добавлена заметка: " + note_header + " " + note_category);
     }
 
     /**
