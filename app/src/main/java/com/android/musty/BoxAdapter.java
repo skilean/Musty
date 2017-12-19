@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ public class BoxAdapter extends BaseAdapter {
     private Button EditButton, DeleteButton;
 
     String noteid, categ;
+
+    ListView mListView;
 
     BoxAdapter(Context context, ArrayList<Note> notes) {
         ctx = context;
@@ -48,7 +51,7 @@ public class BoxAdapter extends BaseAdapter {
 
     // пункт списка
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         // используем созданные, но не используемые view
         View view = convertView;
         if (view == null) {
@@ -82,13 +85,18 @@ public class BoxAdapter extends BaseAdapter {
             public  void onClick(View v){
                 TableInteraction TI = new TableInteraction(ctx);
                 TI.deleteNote(DBHelper.Columns.TABLE_NAME, Integer.parseInt(noteid));
+                notifyDataSetChanged();
                 Toast toast = Toast.makeText(ctx, "Заметка удалена", Toast.LENGTH_SHORT);
                 toast.show();
-
             }
         });
 
         return view;
+    }
+
+    public void clearData() {
+        // clear the data
+        objects.clear();
     }
 
     // заметка по позиции
