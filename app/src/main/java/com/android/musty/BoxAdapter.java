@@ -14,7 +14,7 @@ public class BoxAdapter extends BaseAdapter {
     Context ctx;
     LayoutInflater lInflater;
     ArrayList<Note> objects;
-    private Button EditButton;
+    private Button EditButton, DeleteButton, InfoButton;
 
 
     BoxAdapter(Context context, ArrayList<Note> notes) {
@@ -60,6 +60,24 @@ public class BoxAdapter extends BaseAdapter {
         //обработчик клавиши
         EditButton = view.findViewById(R.id.edit_button);
         EditButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                Intent intent = new Intent(ctx, CreateEditActivity.class);
+                ctx.startActivity(intent);
+            }
+        });
+
+        DeleteButton = view.findViewById(R.id.delete_button);
+        DeleteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                Intent intent = new Intent(ctx, CreateEditActivity.class);
+                ctx.startActivity(intent);
+            }
+        });
+
+        InfoButton = view.findViewById(R.id.info_button);
+        InfoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
                 Intent intent = new Intent(ctx, CreateEditActivity.class);
