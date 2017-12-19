@@ -40,13 +40,14 @@ public class CreateEditActivity extends AppCompatActivity {
                 String headerstr = header.getText().toString();
 
                 Spinner category = findViewById(R.id.catIn);
-                String categorystr = category.getSelectedItem().toString();;
+                String categorystr = category.getSelectedItem().toString();
+
 
                 TableLayout tags  = findViewById(R.id.tags_table);
                 String tagsstr;
 
                 TableInteraction TI = new TableInteraction(CreateEditActivity.this.getApplicationContext());
-                TI.addNote(DBHelper.Columns.TABLE_NAME, headerstr, "", "", categorystr, "");
+                TI.addNote(DBHelper.Columns.TABLE_NAME, headerstr, " ", " ", categorystr, " ");
             }
         });
 
