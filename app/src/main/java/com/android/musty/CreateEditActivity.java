@@ -17,6 +17,12 @@ import android.util.Log;
 public class CreateEditActivity extends AppCompatActivity {
 
     private Button AddNote;
+
+    String noteid = null;
+    String categ = null;
+    int flag = 0;
+    EditText editText;
+
     private CheckBox CheckBox;
     private CheckBox CheckBox2;
     private CheckBox CheckBox3;
@@ -55,6 +61,31 @@ public class CreateEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_edit);
 
 
+        editText = findViewById(R.id.note_nameIn);
+
+        noteid = getIntent().getStringExtra("id");
+        categ = getIntent().getStringExtra("category");
+        if (noteid != null)
+        {
+            TableInteraction TI = new TableInteraction(CreateEditActivity.this.getApplicationContext());
+            Object[][] not = TI.readtable(DBHelper.Columns.TABLE_NAME, categ);
+            if(not != null) {
+                flag = 1;
+                for (int i = 0; i < not.length; i++) {
+                    if (not[i][0].toString() == noteid) {
+
+                        editText.setHint("");
+                        editText.setText(not[i][1].toString());
+
+                        //Надо поменять спинер
+                    }
+                }
+            }
+
+
+        }
+
+
 
         AddNote = findViewById(R.id.add_button2);
         AddNote.setOnClickListener(new View.OnClickListener() {
@@ -75,9 +106,17 @@ public class CreateEditActivity extends AppCompatActivity {
                 if(CheckBox6.isChecked()){tags = tags + CheckBox6.getText().toString() + " ";}
 
 
-
                 TableInteraction TI = new TableInteraction(CreateEditActivity.this.getApplicationContext());
-                TI.addNote(DBHelper.Columns.TABLE_NAME, headerstr, tags, " ", categorystr, " ");
+
+
+                if (flag == 0)
+                  TI.addNote(DBHelper.Columns.TABLE_NAME, headerstr, tags, " ", categorystr, " ");
+                else
+                    TI.addNote(DBHelper.Columns.TABLE_NAME, Integer.parseInt(noteid), headerstr, tags, " ", categorystr, " ");
+
+                Intent intent = new Intent( CreateEditActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Если не хотим сохранять историю
+                startActivity(intent);
             }
         });
 

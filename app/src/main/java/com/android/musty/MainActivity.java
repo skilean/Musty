@@ -6,22 +6,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private Button CreateEditButton;
-    private Button InfoButton;
-    private Button FilmsButton, SeriesButton, BooksButton, GamesButton;
+
+    private Button FilmsButton, SeriesButton, BooksButton, GamesButton, CreateEditButton, InfoButton, ExitButton;
 
     ArrayList<Note> notes = new ArrayList<Note>();
     BoxAdapter boxAdapter;
     DBHelper dbHelper;
-
-    ListView lvMain; //= (ListView) findViewById(R.id.lvMain);
+    ListView lvMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +52,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ExitButton = findViewById(R.id.exit_button);
+        ExitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                finishAffinity();
+            }
+        });
+
+        lvMain = findViewById(R.id.lvMain);
+
         FilmsButton = findViewById(R.id.film_button);
         FilmsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
+
                 fillData("Фильмы");
                 boxAdapter = new BoxAdapter(MainActivity.this, notes);
+                lvMain.setAdapter(boxAdapter);
 
-                lvMain = findViewById(R.id.lvMain);
+                BoxAdapter boxAdapter = (BoxAdapter)lvMain.getAdapter();
+                boxAdapter.clearData();
+                boxAdapter.notifyDataSetChanged();
+
+                fillData("Фильмы");
+                boxAdapter = new BoxAdapter(MainActivity.this, notes);
                 lvMain.setAdapter(boxAdapter);
             }
         });
@@ -67,12 +87,17 @@ public class MainActivity extends AppCompatActivity {
         SeriesButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
-                // создаем адаптер
+
                 fillData("Сериалы");
                 boxAdapter = new BoxAdapter(MainActivity.this, notes);
+                lvMain.setAdapter(boxAdapter);
 
-                // настраиваем список
-                lvMain = findViewById(R.id.lvMain);
+                BoxAdapter boxAdapter = (BoxAdapter)lvMain.getAdapter();
+                boxAdapter.clearData();
+                boxAdapter.notifyDataSetChanged();
+
+                fillData("Сериалы");
+                boxAdapter = new BoxAdapter(MainActivity.this, notes);
                 lvMain.setAdapter(boxAdapter);
             }
         });
@@ -81,12 +106,17 @@ public class MainActivity extends AppCompatActivity {
         BooksButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
-                // создаем адаптер
+
                 fillData("Книги");
                 boxAdapter = new BoxAdapter(MainActivity.this, notes);
+                lvMain.setAdapter(boxAdapter);
 
-                // настраиваем список
-                lvMain = findViewById(R.id.lvMain);
+                BoxAdapter boxAdapter = (BoxAdapter)lvMain.getAdapter();
+                boxAdapter.clearData();
+                boxAdapter.notifyDataSetChanged();
+
+                fillData("Книги");
+                boxAdapter = new BoxAdapter(MainActivity.this, notes);
                 lvMain.setAdapter(boxAdapter);
             }
         });
@@ -95,16 +125,21 @@ public class MainActivity extends AppCompatActivity {
         GamesButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
-                // создаем адаптер
+
                 fillData("Игры");
                 boxAdapter = new BoxAdapter(MainActivity.this, notes);
-
-                // настраиваем список
-                lvMain = findViewById(R.id.lvMain);
                 lvMain.setAdapter(boxAdapter);
 
+                BoxAdapter boxAdapter = (BoxAdapter)lvMain.getAdapter();
+                boxAdapter.clearData();
+                boxAdapter.notifyDataSetChanged();
+
+                fillData("Игры");
+                boxAdapter = new BoxAdapter(MainActivity.this, notes);
+                lvMain.setAdapter(boxAdapter);
             }
         });
+
     }
 
     //поидее тут надо заполнять заметки данными из БД
