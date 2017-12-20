@@ -112,7 +112,7 @@ public class CreateEditActivity extends AppCompatActivity {
                 if (flag == 0)
                   TI.addNote(DBHelper.Columns.TABLE_NAME, headerstr, tags, " ", categorystr, " ");
                 else
-                    TI.addNote(DBHelper.Columns.TABLE_NAME, Integer.parseInt(noteid), headerstr, tags, " ", categorystr, " ");
+                    TI.editNote(DBHelper.Columns.TABLE_NAME, Integer.parseInt(noteid), headerstr, tags, " ", categorystr, " ");
 
                 Intent intent = new Intent( CreateEditActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Если не хотим сохранять историю

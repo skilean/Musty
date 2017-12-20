@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sun.javafx.scene.layout.region.Margins;
+//import com.sun.javafx.scene.layout.region.Margins;
 
 public class BoxAdapter extends BaseAdapter {
     Context ctx;
