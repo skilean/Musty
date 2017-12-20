@@ -1,6 +1,8 @@
 package com.android.musty;
 
 import java.util.ArrayList;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -18,7 +20,7 @@ public class BoxAdapter extends BaseAdapter {
     Context ctx;
     LayoutInflater lInflater;
     ArrayList<Note> objects;
-    private Button EditButton, DeleteButton;
+    private Button EditButton, DeleteButton, CategoryButton;
 
     String noteid, categ;
 
@@ -51,9 +53,10 @@ public class BoxAdapter extends BaseAdapter {
 
     // пункт списка
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
         // используем созданные, но не используемые view
         View view = convertView;
+
         if (view == null) {
             view = lInflater.inflate(R.layout.item, parent, false);
         }
@@ -82,14 +85,37 @@ public class BoxAdapter extends BaseAdapter {
         DeleteButton = view.findViewById(R.id.delete_button);
         DeleteButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public  void onClick(View v){
+            public  void onClick(View v) {
                 TableInteraction TI = new TableInteraction(ctx);
                 TI.deleteNote(DBHelper.Columns.TABLE_NAME, Integer.parseInt(noteid));
                 notifyDataSetChanged();
                 Toast toast = Toast.makeText(ctx, "Заметка удалена", Toast.LENGTH_SHORT);
                 toast.show();
+
+                switch (categ) {
+                    case "Фильмы":
+                        CategoryButton = (Button) ((Activity) ctx).findViewById(R.id.film_button);
+                        CategoryButton.performClick();
+                        break;
+
+                    case "Сериалы":
+                        CategoryButton = (Button) ((Activity) ctx).findViewById(R.id.series_button);
+                        CategoryButton.performClick();
+                        break;
+
+                    case "Книги":
+                        CategoryButton = (Button) ((Activity) ctx).findViewById(R.id.books_button);
+                        CategoryButton.performClick();
+                        break;
+
+                    case "Игры":
+                        CategoryButton = (Button) ((Activity) ctx).findViewById(R.id.games_button);
+                        CategoryButton.performClick();
+                        break;
+                }
             }
         });
+
 
         return view;
     }

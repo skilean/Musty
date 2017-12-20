@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Note> notes = new ArrayList<Note>();
     BoxAdapter boxAdapter;
     DBHelper dbHelper;
-
     ListView lvMain;
 
     @Override
