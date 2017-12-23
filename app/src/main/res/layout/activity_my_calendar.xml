@@ -15,4 +15,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="125dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Установить дату"
+        android:id="@+id/add_date"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/datalook"
+        android:visibility="gone"/>
 </android.support.constraint.ConstraintLayout>

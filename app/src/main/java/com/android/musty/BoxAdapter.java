@@ -22,7 +22,7 @@ public class BoxAdapter extends BaseAdapter {
     ArrayList<Note> objects;
     private Button EditButton, DeleteButton, CategoryButton;
 
-    String noteid, categ;
+    String noteid, categ, name, date;
 
     ListView mListView;
 
@@ -64,20 +64,26 @@ public class BoxAdapter extends BaseAdapter {
         Note p = getNotes(position);
         noteid = p.id;
         categ = p.category;
+        name = p.name;
+        date = p.date;
 
         // заполняем View в пункте списка данными
         ((TextView) view.findViewById(R.id.item_name)).setText(p.name);
         ((TextView) view.findViewById(R.id.item_tags)).setText(p.tags);
         ((TextView) view.findViewById(R.id.item_id)).setText(p.id);
+        ((TextView) view.findViewById(R.id.item_date)).setText(p.date);
 
         //обработчик клавиши
         EditButton = view.findViewById(R.id.edit_button);
         EditButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void onClick(View v){
+                String date1 = "";
                 Intent intent = new Intent(ctx, CreateEditActivity.class);
                 intent.putExtra("id", noteid);
                 intent.putExtra("category", categ);
+                intent.putExtra("date", date);
+                intent.putExtra("name", name);
                 ctx.startActivity(intent);
             }
         });

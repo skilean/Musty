@@ -8,18 +8,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.util.Log;
-
 
 public class CreateEditActivity extends AppCompatActivity {
 
     private Button AddNote;
-
+    private Button Calendar;
     String noteid = null;
     String categ = null;
+    String date="";
+    String name="";
+
     int flag = 0;
     EditText editText;
 
@@ -29,6 +28,8 @@ public class CreateEditActivity extends AppCompatActivity {
     private CheckBox CheckBox4;
     private CheckBox CheckBox5;
     private CheckBox CheckBox6;
+
+    TextView datalook;
 
     public void onTagsClick(View view)
     {
@@ -60,11 +61,19 @@ public class CreateEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit);
 
+        Intent intent = getIntent();
+        noteid =intent.getStringExtra("id");
+        categ = intent.getStringExtra("categ");
+        date = intent.getStringExtra("date");
+        name = intent.getStringExtra("name");
 
         editText = findViewById(R.id.note_nameIn);
+        editText.setText(name);
+        TextView f = findViewById(R.id.textdata);
+        f.setText(date.toString());
 
-        noteid = getIntent().getStringExtra("id");
-        categ = getIntent().getStringExtra("category");
+
+
         if (noteid != null)
         {
             TableInteraction TI = new TableInteraction(CreateEditActivity.this.getApplicationContext());
@@ -85,7 +94,16 @@ public class CreateEditActivity extends AppCompatActivity {
 
         }
 
-
+        Calendar = findViewById(R.id.show_cal);
+        Calendar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                Intent intent = new Intent(CreateEditActivity.this, MyCalendarActivity.class);
+                String name = editText.getText().toString();
+                intent.putExtra("name", name);
+                startActivity(intent);
+            }
+        });
 
         AddNote = findViewById(R.id.add_button2);
         AddNote.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +114,7 @@ public class CreateEditActivity extends AppCompatActivity {
 
                 Spinner category = findViewById(R.id.catIn);
                 String categorystr = category.getSelectedItem().toString();
+
                 String tags = "";
 
                 if(CheckBox.isChecked()){tags = tags + CheckBox.getText().toString() + " ";}
@@ -110,9 +129,9 @@ public class CreateEditActivity extends AppCompatActivity {
 
 
                 if (flag == 0)
-                  TI.addNote(DBHelper.Columns.TABLE_NAME, headerstr, tags, " ", categorystr, " ");
+                  TI.addNote(DBHelper.Columns.TABLE_NAME, headerstr, tags, date, categorystr, " ");
                 else
-                    TI.editNote(DBHelper.Columns.TABLE_NAME, Integer.parseInt(noteid), headerstr, tags, " ", categorystr, " ");
+                    TI.editNote(DBHelper.Columns.TABLE_NAME, Integer.parseInt(noteid), headerstr, tags, date, categorystr, " ");
 
                 Intent intent = new Intent( CreateEditActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Если не хотим сохранять историю

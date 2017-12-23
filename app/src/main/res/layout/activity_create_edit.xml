@@ -7,6 +7,13 @@
     tools:context="com.android.musty.CreateEditActivity">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/textdata"
+        android:text="Тут дата"/>
+
+    <TextView
         android:id="@+id/note_name"
         android:layout_width="287dp"
         android:layout_height="39dp"

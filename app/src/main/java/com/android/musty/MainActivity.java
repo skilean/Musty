@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button FilmsButton, SeriesButton, BooksButton, GamesButton, CreateEditButton, InfoButton, ExitButton;
+    private Button FilmsButton, SeriesButton, BooksButton, GamesButton, CreateEditButton, InfoButton, Cale2, ExitButton;
 
     ArrayList<Note> notes = new ArrayList<Note>();
     BoxAdapter boxAdapter;
@@ -38,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public  void onClick(View v){
                 Intent intent = new Intent(MainActivity.this, CreateEditActivity.class);
+                String date = "";
+                String name = "";
+                String id = "";
+                String categ ="";
+                intent.putExtra("date", date);
+                intent.putExtra("name",name);
+                intent.putExtra("id",id);
+                intent.putExtra("categ",categ);
                 startActivity(intent);
                 }
         });
@@ -140,7 +148,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
+        Cale2 = findViewById(R.id.my_calendar_button);
+        Cale2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, Calendar2.class);
+                startActivity(intent);
+            }
+        });    }
 
     //поидее тут надо заполнять заметки данными из БД
     void fillData(String category) {
